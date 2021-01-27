@@ -1,0 +1,30 @@
+#Apache2
+
+sudo apt install apache2
+sudo ufw app list
+sudo ufw allow in "Apache"
+sudo ufw status
+
+
+#mysql
+
+sudo apt install mysql-server
+sudo mysql_secure_installation
+
+CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost';
+FLUSH PRIVILEGES;
+
+
+#PHP
+
+sudo apt install php libapache2-mod-php php-mysql
+sudo chown -R $USER:$USER /var/www/
+sudo a2enmod rewrite
+sudo systemctl restart apache2
+
+<Directory /var/www/html>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
